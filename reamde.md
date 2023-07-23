@@ -1,4 +1,4 @@
-## Datos previos
+## Datos previos - chequear instalaciones
 ``````
 cat /etc/os-release
 ``````
@@ -15,9 +15,13 @@ Client Version: v1.27.4
 Minikube version
 ``````
 minikube version: v1.31.1
+To check ports being used (8080 for example)
+``````
+sudo ss -tuln | grep 8080
+``````
 
 
-Clonar repo
+Clonar repo Cami - Grafana Example - y tomar archivos de jenkins y docker-compose
 
 
 
@@ -49,11 +53,25 @@ kubectl version --client
 ````` 
 
 ## Acceder a Jenkins 
+Desde la vps se pude chequear que jenkins está corriendo con este comando
+````` 
+ps aux | grep jenkins
+````` 
+Del que se obtiene esta línea
+````` 
+root 7 3.3 30.9 3621548 1244840 ? Sl 15:19 3:23 java -Duser.home=/var/jenkins_home -Djenkins.model.Jenkins.slaveAgentPort=50000 -Dhudson.lifecycle=hudson.lifecycle.ExitLifecycle -jar /usr/share/jenkins/jenkins.war
+````` 
+The output shows that there is a Java process (identified by java) running as PID 7, which corresponds to Jenkins. It is executing the Jenkins web application using the jenkins.war file located at /usr/share/jenkins/jenkins.war. The process is owned by the root user.
+
+The presence of this process confirms that Jenkins is running on your system.
+
+##que viene con el archivo cami profe
 
 Ahora se puede acceder a Jenkins desde la ruta de Minikube: 
 
 http://localhost:8080
 
+##Este paso de instalación inicial ya está hecho
 Instalación inicial. Necesitamos poner la clave inicial: 
 Ruta var/jenkins_home/secrets/initialAdminPassword 
 
